@@ -61,9 +61,8 @@ func _build_ui() -> void:
 	click_catcher.gui_input.connect(_on_background_click)
 	add_child(click_catcher)
 
-	# Main panel (centered)
+	# Main panel (centered via direct position, no anchors)
 	var panel := PanelContainer.new()
-	panel.set_anchors_preset(Control.PRESET_CENTER)
 	var panel_style := StyleBoxFlat.new()
 	panel_style.bg_color = Color(0.1, 0.1, 0.1, 0.95)
 	panel_style.set_corner_radius_all(3)

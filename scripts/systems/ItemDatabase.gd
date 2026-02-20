@@ -145,7 +145,7 @@ func _validate_item(item: Dictionary) -> bool:
 		"MATERIAL", "TOOL", "SEED", "CROP", "FISH",
 		"CRAFTED", "FOOD", "FURNITURE", "QUEST", "ARTIFACT",
 	]
-	if category not in valid_categories:
+	if not category in valid_categories:
 		push_warning("ItemDatabase: item '%s' has unknown category '%s'" % [item["id"], category])
 		return false
 

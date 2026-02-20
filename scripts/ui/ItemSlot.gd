@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Control
 class_name ItemSlot
 ## Individual inventory slot UI. Displays an item icon (placeholder color),
 ## quantity label, quality indicator, and optional key label.
@@ -28,11 +28,13 @@ const CATEGORY_COLORS: Dictionary = {
 const EMPTY_SLOT_COLOR := Color(0.15, 0.15, 0.15, 0.8)
 const SLOT_BG_COLOR := Color(0.2, 0.2, 0.2, 0.9)
 const SELECTION_COLOR := Color(1.0, 0.9, 0.2, 0.8)
+const BORDER_COLOR := Color(0.3, 0.3, 0.3)
 
 var slot_index: int = -1
 var _item_data: Dictionary = Inventory._empty_slot()
 var _is_selected: bool = false
 var _show_key_label: bool = false
+var _pending_key_text: String = ""
 
 var _icon_rect: ColorRect
 var _letter_label: Label
@@ -40,16 +42,30 @@ var _quantity_label: Label
 var _quality_indicator: ColorRect
 var _key_label: Label
 var _selection_highlight: ColorRect
-var _bg_style: StyleBoxFlat
+var _bg_color: Color = EMPTY_SLOT_COLOR
 
 
 func _ready() -> void:
 	custom_minimum_size = SLOT_SIZE
+	size = SLOT_SIZE
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 	_build_ui()
+
+	# Apply pending key label if set_key_label was called before _ready
+	if _pending_key_text != "":
+		_key_label.text = _pending_key_text
+		_key_label.visible = true
+
 	_update_display()
+
+
+func _draw() -> void:
+	# Background
+	draw_rect(Rect2(Vector2.ZERO, SLOT_SIZE), _bg_color)
+	# Border
+	draw_rect(Rect2(Vector2.ZERO, SLOT_SIZE), BORDER_COLOR, false, 1.0)
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -84,6 +100,8 @@ func set_key_label(text: String) -> void:
 	if _key_label:
 		_key_label.text = text
 		_key_label.visible = true
+	else:
+		_pending_key_text = text
 
 
 ## Set whether this slot is highlighted as selected.
@@ -109,10 +127,8 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	if not has_item():
 		return null
 
-	# Create a visual preview of the dragged item
 	var preview := _create_drag_preview()
 	set_drag_preview(preview)
-
 	return {"source_index": slot_index, "item_data": _item_data.duplicate()}
 
 
@@ -122,7 +138,6 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	if data is Dictionary:
-		var drag_data := data as Dictionary
 		slot_clicked.emit(slot_index, MOUSE_BUTTON_LEFT)
 
 
@@ -139,17 +154,8 @@ func _create_drag_preview() -> Control:
 # ── Internal ───────────────────────────────────────────────────────────────
 
 func _build_ui() -> void:
-	# Background style
-	_bg_style = StyleBoxFlat.new()
-	_bg_style.bg_color = EMPTY_SLOT_COLOR
-	_bg_style.set_border_width_all(1)
-	_bg_style.border_color = Color(0.3, 0.3, 0.3)
-	_bg_style.set_corner_radius_all(1)
-	add_theme_stylebox_override("panel", _bg_style)
-
 	# Icon rectangle (colored placeholder)
 	_icon_rect = ColorRect.new()
-	_icon_rect.custom_minimum_size = Vector2(14, 14)
 	_icon_rect.size = Vector2(14, 14)
 	_icon_rect.position = Vector2(2, 2)
 	_icon_rect.color = Color.TRANSPARENT
@@ -184,7 +190,6 @@ func _build_ui() -> void:
 
 	# Quality indicator (top-right, 3x3 colored dot)
 	_quality_indicator = ColorRect.new()
-	_quality_indicator.custom_minimum_size = Vector2(3, 3)
 	_quality_indicator.size = Vector2(3, 3)
 	_quality_indicator.position = Vector2(14, 1)
 	_quality_indicator.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -219,20 +224,19 @@ func _update_display() -> void:
 		return
 
 	if _item_data["item_id"] == "":
-		# Empty slot
-		_bg_style.bg_color = EMPTY_SLOT_COLOR
+		_bg_color = EMPTY_SLOT_COLOR
 		_icon_rect.color = Color.TRANSPARENT
 		_letter_label.text = ""
 		_quantity_label.visible = false
 		_quality_indicator.visible = false
+		queue_redraw()
 		return
 
 	var item_info := ItemDatabase.get_item(_item_data["item_id"])
 	if item_info.is_empty():
 		return
 
-	# Slot background
-	_bg_style.bg_color = SLOT_BG_COLOR
+	_bg_color = SLOT_BG_COLOR
 
 	# Placeholder icon: colored rect by category
 	var category: String = item_info.get("category", "")
@@ -257,3 +261,5 @@ func _update_display() -> void:
 			_quality_indicator.color = Color(1.0, 0.84, 0.0)
 		_:
 			_quality_indicator.visible = false
+
+	queue_redraw()
