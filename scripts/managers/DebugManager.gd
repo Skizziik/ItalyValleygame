@@ -14,7 +14,7 @@ var log_filters: Dictionary = {
 	"game": true,
 	"time": true,
 	"player": true,
-	"inventory": false,
+	"inventory": true,
 	"farming": false,
 	"npc": false,
 	"quest": false,

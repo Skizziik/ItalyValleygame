@@ -188,8 +188,8 @@ func _build_save_data() -> Dictionary:
 		"playtime_seconds": GameManager.get_playtime_seconds(),
 		"game_manager": GameManager.serialize(),
 		"time": TimeManager.serialize(),
+		"inventory": InventoryManager.serialize(),
 		# Future systems add their serialize() here:
-		# "inventory": InventoryManager.serialize(),
 		# "economy": EconomyManager.serialize(),
 		# "quests": QuestManager.serialize(),
 		# "relationships": NPCManager.serialize(),
@@ -201,8 +201,8 @@ func _build_save_data() -> Dictionary:
 func _apply_save_data(data: Dictionary) -> void:
 	GameManager.deserialize(data.get("game_manager", {}))
 	TimeManager.deserialize(data.get("time", {}))
+	InventoryManager.deserialize(data.get("inventory", {}))
 	# Future systems add their deserialize() here:
-	# InventoryManager.deserialize(data.get("inventory", {}))
 	# EconomyManager.deserialize(data.get("economy", {}))
 	# QuestManager.deserialize(data.get("quests", {}))
 	# NPCManager.deserialize(data.get("relationships", {}))

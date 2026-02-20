@@ -26,6 +26,8 @@ AudioManager="*res://scripts/managers/AudioManager.gd"
 SceneLoader="*res://scripts/managers/SceneLoader.gd"
 SaveManager="*res://scripts/managers/SaveManager.gd"
 DebugManager="*res://scripts/managers/DebugManager.gd"
+ItemDatabase="*res://scripts/systems/ItemDatabase.gd"
+InventoryManager="*res://scripts/systems/InventoryManager.gd"
 
 [audio]
 
