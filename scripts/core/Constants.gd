@@ -104,5 +104,19 @@ const DEFAULT_BGM_VOLUME_DB: float = -6.0
 const DEFAULT_AMBIENT_VOLUME_DB: float = -10.0
 const DEFAULT_UI_VOLUME_DB: float = -3.0
 
+# --- Maps ---
+const FARM_MAP_WIDTH: int = 40   # tiles
+const FARM_MAP_HEIGHT: int = 30  # tiles
+const FARMHOUSE_MAP_WIDTH: int = 12  # tiles
+const FARMHOUSE_MAP_HEIGHT: int = 10  # tiles
+
+# --- Physics Layers (bit indices, not values) ---
+const PHYSICS_LAYER_WORLD: int = 1
+const PHYSICS_LAYER_PLAYER: int = 2
+const PHYSICS_LAYER_NPC: int = 3
+const PHYSICS_LAYER_INTERACTABLE: int = 4
+const PHYSICS_LAYER_TOOL_TARGET: int = 5
+const PHYSICS_LAYER_ENEMY: int = 6
+
 # --- Debug ---
 const DEBUG_OVERLAY_UPDATE_INTERVAL: float = 0.25  # update overlay 4x per second

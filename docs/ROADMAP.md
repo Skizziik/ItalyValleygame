@@ -293,9 +293,9 @@ Post-MVP phases (11-21, 24-28) can be developed in flexible order once the MVP c
 
 | Phase | Name                    | Status |
 |-------|-------------------------|--------|
-| 0     | Project Setup           | [ ]    |
-| 1     | Core/Managers           | [ ]    |
-| 2     | Player                  | [ ]    |
+| 0     | Project Setup           | [x]    |
+| 1     | Core/Managers           | [x]    |
+| 2     | Player                  | [x]    |
 | 3     | World                   | [ ]    |
 | 4     | Time System             | [ ]    |
 | 5     | Inventory               | [ ]    |

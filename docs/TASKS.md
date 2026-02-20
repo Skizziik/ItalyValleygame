@@ -18,160 +18,160 @@
 - [x] Configure input map: interact (E), use_tool (LMB), inventory (I), journal (J), map (M), quests (Q), craft (C), pause (Esc)
 - [x] Create `docs/GDD.md` (Game Design Document)
 - [x] Create `docs/TASKS.md` (this file)
-- [ ] Create `docs/ROADMAP.md` (milestone timeline with target dates)
-- [ ] Create `docs/ASSETS_LICENSES.md` (source, license, attribution for every asset)
-- [ ] Create `README.md` (how to run, controls, project structure)
-- [ ] Initialize git repository
-- [ ] Set up `.gitignore` for Godot (exclude `.godot/`, `*.import` cached files)
-- [ ] Push initial commit to GitHub (`ItalyValleygame` repo)
-- [ ] Configure internationalization settings for RU/EN
+- [x] Create `docs/ROADMAP.md` (milestone timeline with target dates)
+- [x] Create `docs/ASSETS_LICENSES.md` (source, license, attribution for every asset)
+- [x] Create `README.md` (how to run, controls, project structure)
+- [x] Initialize git repository
+- [x] Set up `.gitignore` for Godot (exclude `.godot/`, `*.import` cached files)
+- [x] Push initial commit to GitHub (`ItalyValleygame` repo)
+- [x] Configure internationalization settings for RU/EN
 
 ---
 
 ## Phase 1: Core Engine & Manager Autoloads
 
 ### 1.1 GameManager (Autoload)
-- [ ] Create `GameManager.gd` autoload script
-- [ ] Define game states enum: MAIN_MENU, PLAYING, PAUSED, DIALOGUE, CUTSCENE, INVENTORY, CRAFTING, SHOPPING, FISHING, COMBAT, LOADING
-- [ ] Implement state machine with `change_state()` and state transition validation
-- [ ] Implement `is_gameplay_active()` helper (blocks input during menus/dialogue)
-- [ ] Add global pause toggle (set `get_tree().paused`)
-- [ ] Register GameManager as autoload in project.godot
+- [x] Create `GameManager.gd` autoload script
+- [x] Define game states enum: MAIN_MENU, PLAYING, PAUSED, DIALOGUE, CUTSCENE, INVENTORY, CRAFTING, SHOPPING, FISHING, COMBAT, LOADING
+- [x] Implement state machine with `change_state()` and state transition validation
+- [x] Implement `is_gameplay_active()` helper (blocks input during menus/dialogue)
+- [x] Add global pause toggle (set `get_tree().paused`)
+- [x] Register GameManager as autoload in project.godot
 
 ### 1.2 SignalBus (Autoload)
-- [ ] Create `SignalBus.gd` global signal bus autoload
-- [ ] Define core signals: `day_started`, `day_ended`, `season_changed`, `weather_changed`
-- [ ] Define player signals: `player_energy_changed`, `player_health_changed`, `player_money_changed`
-- [ ] Define inventory signals: `item_added`, `item_removed`, `item_used`, `hotbar_changed`
-- [ ] Define NPC signals: `friendship_changed`, `gift_given`, `dialogue_started`, `dialogue_ended`
-- [ ] Define quest signals: `quest_started`, `quest_completed`, `quest_failed`, `quest_objective_updated`
-- [ ] Define economy signals: `item_sold`, `item_bought`, `shop_opened`, `shop_closed`
-- [ ] Define world signals: `crop_planted`, `crop_harvested`, `tree_chopped`, `rock_mined`
-- [ ] Define combat signals: `enemy_hit`, `enemy_defeated`, `player_hit`, `boss_phase_changed`
+- [x] Create `SignalBus.gd` global signal bus autoload
+- [x] Define core signals: `day_started`, `day_ended`, `season_changed`, `weather_changed`
+- [x] Define player signals: `player_energy_changed`, `player_health_changed`, `player_money_changed`
+- [x] Define inventory signals: `item_added`, `item_removed`, `item_used`, `hotbar_changed`
+- [x] Define NPC signals: `friendship_changed`, `gift_given`, `dialogue_started`, `dialogue_ended`
+- [x] Define quest signals: `quest_started`, `quest_completed`, `quest_failed`, `quest_objective_updated`
+- [x] Define economy signals: `item_sold`, `item_bought`, `shop_opened`, `shop_closed`
+- [x] Define world signals: `crop_planted`, `crop_harvested`, `tree_chopped`, `rock_mined`
+- [x] Define combat signals: `enemy_hit`, `enemy_defeated`, `player_hit`, `boss_phase_changed`
 
 ### 1.3 SceneLoader (Autoload)
-- [ ] Create `SceneLoader.gd` autoload for scene transitions
-- [ ] Implement `change_scene(path, transition_type)` method
-- [ ] Implement fade-to-black transition (ColorRect + AnimationPlayer)
+- [x] Create `SceneLoader.gd` autoload for scene transitions
+- [x] Implement `change_scene(path, transition_type)` method
+- [x] Implement fade-to-black transition (ColorRect + AnimationPlayer)
 - [ ] Implement fade-to-white transition (for special events)
 - [ ] Add loading screen support for larger scenes
-- [ ] Handle spawn point data between scenes (entry position + direction)
-- [ ] Prevent double-loading / input during transition
+- [x] Handle spawn point data between scenes (entry position + direction)
+- [x] Prevent double-loading / input during transition
 
 ### 1.4 AudioManager (Autoload)
-- [ ] Create `AudioManager.gd` autoload
-- [ ] Implement BGM (background music) player with crossfade
-- [ ] Implement ambient sound layer (separate from BGM)
-- [ ] Implement SFX player (pooled AudioStreamPlayers for concurrent sounds)
-- [ ] Implement UI sound player (clicks, hovers, open/close)
-- [ ] Add volume controls: master, music, ambient, SFX, UI
-- [ ] Add music transition system (fade out old, fade in new)
-- [ ] Implement `play_bgm()`, `play_sfx()`, `play_ambient()`, `play_ui_sound()` methods
-- [ ] Mute / unmute support
+- [x] Create `AudioManager.gd` autoload
+- [x] Implement BGM (background music) player with crossfade
+- [x] Implement ambient sound layer (separate from BGM)
+- [x] Implement SFX player (pooled AudioStreamPlayers for concurrent sounds)
+- [x] Implement UI sound player (clicks, hovers, open/close)
+- [x] Add volume controls: master, music, ambient, SFX, UI
+- [x] Add music transition system (fade out old, fade in new)
+- [x] Implement `play_bgm()`, `play_sfx()`, `play_ambient()`, `play_ui_sound()` methods
+- [x] Mute / unmute support
 
 ### 1.5 Debug System
-- [ ] Create `DebugManager.gd` autoload
-- [ ] Implement DEBUG flag toggle (F3 or config)
-- [ ] Create on-screen debug overlay (FPS, game state, time, position, season, weather)
+- [x] Create `DebugManager.gd` autoload
+- [x] Implement DEBUG flag toggle (F3 or config)
+- [x] Create on-screen debug overlay (FPS, game state, time, position, season, weather)
 - [ ] Implement debug console / command input (toggle with tilde ~)
 - [ ] Add debug commands: `set_time`, `set_season`, `give_item`, `set_money`, `teleport`, `set_friendship`
 - [ ] Add debug commands: `spawn_enemy`, `godmode`, `skip_day`, `set_weather`
-- [ ] Log system with severity levels (INFO, WARN, ERROR) and file output
-- [ ] Ensure all debug features are disabled in release builds
+- [x] Log system with severity levels (INFO, WARN, ERROR) and file output
+- [x] Ensure all debug features are disabled in release builds
 
 ### 1.6 Constants & Enums
-- [ ] Create `Constants.gd` with game-wide constants (tile size, max stack, etc.)
-- [ ] Create `Enums.gd` with shared enums (ItemCategory, Season, Weather, Quality, ToolTier, etc.)
-- [ ] Define item categories: RESOURCE, MATERIAL, SEED, CROP, FISH, FOOD, TOOL, WEAPON, FURNITURE, QUEST, ARTIFACT, CRAFTED_GOOD, ANIMAL_PRODUCT
-- [ ] Define quality levels: NORMAL, SILVER, GOLD, IRIDIUM
-- [ ] Define seasons: SPRING, SUMMER, AUTUMN, WINTER
-- [ ] Define weather types: CLEAR, CLOUDY, RAIN, STORM
-- [ ] Define tool tiers: BASIC, COPPER, IRON, GOLD
+- [x] Create `Constants.gd` with game-wide constants (tile size, max stack, etc.)
+- [x] Create `Enums.gd` with shared enums (ItemCategory, Season, Weather, Quality, ToolTier, etc.)
+- [x] Define item categories: RESOURCE, MATERIAL, SEED, CROP, FISH, FOOD, TOOL, WEAPON, FURNITURE, QUEST, ARTIFACT, CRAFTED_GOOD, ANIMAL_PRODUCT
+- [x] Define quality levels: NORMAL, SILVER, GOLD, IRIDIUM
+- [x] Define seasons: SPRING, SUMMER, AUTUMN, WINTER
+- [x] Define weather types: CLEAR, CLOUDY, RAIN, STORM
+- [x] Define tool tiers: BASIC, COPPER, IRON, GOLD
 
 ---
 
 ## Phase 2: Player Character
 
 ### 2.1 Player Scene & Movement
-- [ ] Create `Player.tscn` scene (CharacterBody2D)
-- [ ] Add Sprite2D (placeholder rectangle or simple sprite)
-- [ ] Add CollisionShape2D (appropriate hitbox)
-- [ ] Create `Player.gd` script extending CharacterBody2D
-- [ ] Implement 8-directional movement (WASD / Arrow keys)
-- [ ] Implement walk speed (base ~80 px/s)
-- [ ] Implement run speed (hold Shift, ~130 px/s)
-- [ ] Track facing direction (last non-zero input vector)
-- [ ] Prevent movement during dialogue/menus/cutscenes (check GameManager state)
+- [x] Create `Player.tscn` scene (CharacterBody2D)
+- [x] Add Sprite2D (placeholder rectangle or simple sprite)
+- [x] Add CollisionShape2D (appropriate hitbox)
+- [x] Create `Player.gd` script extending CharacterBody2D
+- [x] Implement 8-directional movement (WASD / Arrow keys)
+- [x] Implement walk speed (base ~80 px/s)
+- [x] Implement run speed (hold Shift, ~130 px/s)
+- [x] Track facing direction (last non-zero input vector)
+- [x] Prevent movement during dialogue/menus/cutscenes (check GameManager state)
 - [ ] Add smooth acceleration / deceleration for cozy feel
 
 ### 2.2 Player Animation
-- [ ] Create AnimationPlayer or AnimatedSprite2D node
+- [x] Create AnimationPlayer or AnimatedSprite2D node
 - [ ] Define animation states: idle_down, idle_up, idle_left, idle_right
 - [ ] Define animation states: walk_down, walk_up, walk_left, walk_right
 - [ ] Define animation states: run_down, run_up, run_left, run_right
 - [ ] Define animation states: use_tool_down, use_tool_up, use_tool_left, use_tool_right
 - [ ] Create AnimationTree with state machine for smooth transitions
 - [ ] Implement animation direction sync with movement direction
-- [ ] Add placeholder sprite frames (colored rectangles per direction)
+- [x] Add placeholder sprite frames (colored rectangles per direction)
 
 ### 2.3 Camera
-- [ ] Add Camera2D as child of Player
-- [ ] Enable position smoothing for smooth follow
-- [ ] Set camera zoom appropriate for 640x360 viewport
+- [x] Add Camera2D as child of Player
+- [x] Enable position smoothing for smooth follow
+- [x] Set camera zoom appropriate for 640x360 viewport
 - [ ] Implement camera limits (clamp to map bounds)
 - [ ] Add camera shake method (for tool impacts, combat hits)
 
 ### 2.4 Energy / Stamina System
-- [ ] Add `max_energy` and `current_energy` to Player
-- [ ] Default max energy: 100 (upgradeable later)
-- [ ] Implement `use_energy(amount)` method with validation
-- [ ] Implement energy depletion effects: speed reduction at <20%, block heavy actions at 0
-- [ ] Implement energy restoration: sleep (full restore), food (partial restore)
-- [ ] Emit `player_energy_changed` signal on change
+- [x] Add `max_energy` and `current_energy` to Player
+- [x] Default max energy: 100 (upgradeable later)
+- [x] Implement `use_energy(amount)` method with validation
+- [x] Implement energy depletion effects: speed reduction at <20%, block heavy actions at 0
+- [x] Implement energy restoration: sleep (full restore), food (partial restore)
+- [x] Emit `player_energy_changed` signal on change
 - [ ] Add energy bar UI element (see Phase 23)
 
 ### 2.5 Health System
-- [ ] Add `max_health` and `current_health` to Player
-- [ ] Default max health: 100
-- [ ] Implement `take_damage(amount)` method with invincibility frames
-- [ ] Implement `heal(amount)` method
+- [x] Add `max_health` and `current_health` to Player
+- [x] Default max health: 100
+- [x] Implement `take_damage(amount)` method with invincibility frames
+- [x] Implement `heal(amount)` method
 - [ ] Implement death/knockout: teleport home, lose some energy, lose small amount of money
-- [ ] Implement invincibility frames after taking damage (flashing sprite)
-- [ ] Emit `player_health_changed` signal on change
+- [x] Implement invincibility frames after taking damage (flashing sprite)
+- [x] Emit `player_health_changed` signal on change
 - [ ] Add health bar UI element (see Phase 23)
 
 ### 2.6 Player Interaction
-- [ ] Add Area2D for interaction detection (in front of player, based on facing direction)
-- [ ] Implement interaction raycast or overlap check
+- [x] Add Area2D for interaction detection (in front of player, based on facing direction)
+- [x] Implement interaction raycast or overlap check
 - [ ] Show contextual prompt ("Press E to ...") when near interactable
-- [ ] Handle interaction input (E key) to trigger nearest interactable
-- [ ] Create `Interactable` base class / interface for objects
-- [ ] Prioritize closest interactable when multiple overlap
+- [x] Handle interaction input (E key) to trigger nearest interactable
+- [x] Create `Interactable` base class / interface for objects
+- [x] Prioritize closest interactable when multiple overlap
 
 ---
 
 ## Phase 3: World & TileMap
 
 ### 3.1 TileMap Setup
-- [ ] Create base TileMap node in world scene
-- [ ] Configure tile size (16x16 pixels)
-- [ ] Set up terrain layers: ground (grass, dirt, sand, stone, water)
+- [x] Create base TileMap node in world scene
+- [x] Configure tile size (16x16 pixels)
+- [x] Set up terrain layers: ground (grass, dirt, sand, stone, water)
 - [ ] Set up terrain layer: paths (cobblestone, gravel, wooden planks)
-- [ ] Set up terrain layer: farmland (soil states)
+- [x] Set up terrain layer: farmland (soil states)
 - [ ] Set up decoration layer (flowers, pebbles, grass tufts)
-- [ ] Set up collision layer on TileMap (walls, water, cliffs)
-- [ ] Configure physics layers: WORLD, PLAYER, NPC, ENEMY, INTERACTABLE, PROJECTILE
+- [x] Set up collision layer on TileMap (walls, water, cliffs)
+- [x] Configure physics layers: WORLD, PLAYER, NPC, ENEMY, INTERACTABLE, PROJECTILE
 - [ ] Add navigation layer for NPC pathfinding
 
 ### 3.2 First Test Map — Farm
-- [ ] Design farm layout (house, garden plots, shed area, path to village)
-- [ ] Paint ground tiles (grass, dirt, farmland plots)
-- [ ] Add collision boundaries (fences, edges)
-- [ ] Place player spawn point marker
-- [ ] Place house entrance door (scene transition trigger)
+- [x] Design farm layout (house, garden plots, shed area, path to village)
+- [x] Paint ground tiles (grass, dirt, farmland plots)
+- [x] Add collision boundaries (fences, edges)
+- [x] Place player spawn point marker
+- [x] Place house entrance door (scene transition trigger)
 - [ ] Place mailbox interactable
 - [ ] Place shipping box interactable
-- [ ] Add farm boundary markers / fences
+- [x] Add farm boundary markers / fences
 
 ### 3.3 Village Map
 - [ ] Design village layout (piazza, cafe, market, dock, residential)
@@ -208,33 +208,33 @@
 - [ ] Add atmospheric elements (moss, cracks, fallen pillars)
 
 ### 3.8 Interior Maps
-- [ ] Player house interior (bedroom, kitchen, living area)
+- [x] Player house interior (bedroom, kitchen, living area)
 - [ ] Cafe interior
 - [ ] Shop interior
 - [ ] Mayor's office interior
 - [ ] Archaeologist's study interior
 
 ### 3.9 Scene Transitions
-- [ ] Create `SceneTransitionArea.tscn` (Area2D trigger)
-- [ ] Implement `target_scene` and `spawn_point` export variables
-- [ ] Trigger SceneLoader fade transition on player overlap
-- [ ] Pass spawn position and facing direction to new scene
+- [x] Create `SceneTransitionArea.gd` (Area2D trigger)
+- [x] Implement `target_scene` and `spawn_point` export variables
+- [x] Trigger SceneLoader fade transition on player overlap
+- [x] Pass spawn position and facing direction to new scene
 - [ ] Test all transitions between maps
 
 ### 3.10 Day/Night Lighting
-- [ ] Add CanvasModulate node for global tint
-- [ ] Define color curves for time-of-day: dawn (6:00), morning, noon, afternoon, dusk, evening, night
-- [ ] Implement smooth color interpolation based on TimeManager
-- [ ] Add interior lighting override (constant inside buildings)
+- [x] Add CanvasModulate node for global tint
+- [x] Define color curves for time-of-day: dawn (6:00), morning, noon, afternoon, dusk, evening, night
+- [x] Implement smooth color interpolation based on TimeManager
+- [x] Add interior lighting override (constant inside buildings)
 - [ ] Add point lights for lamps, windows at night
 - [ ] Add streetlamp auto-on at dusk
 
 ### 3.11 Weather System (Visual)
-- [ ] Create rain particle effect (GPUParticles2D)
-- [ ] Create storm particle effect (heavy rain + lightning flashes)
+- [x] Create rain particle effect (GPUParticles2D)
+- [x] Create storm particle effect (heavy rain + lightning flashes)
 - [ ] Create cloudy overlay (subtle darkening)
-- [ ] Implement clear weather (no overlay, bright sun tint)
-- [ ] Sync weather visuals with TimeManager weather state
+- [x] Implement clear weather (no overlay, bright sun tint)
+- [x] Sync weather visuals with TimeManager weather state
 - [ ] Add puddle sprites that appear during rain (optional)
 
 ### 3.12 Seasonal Tile Swaps

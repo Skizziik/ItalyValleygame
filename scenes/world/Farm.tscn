@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://farm01"]
+
+[ext_resource type="Script" path="res://scripts/world/Farm.gd" id="1_farm"]
+[ext_resource type="TileSet" path="res://assets/tilesets/world_tileset.tres" id="2_tileset"]
+[ext_resource type="PackedScene" uid="uid://player01" path="res://scenes/player/Player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/world/DayNightCycle.gd" id="4_daynight"]
+[ext_resource type="Script" path="res://scripts/world/WeatherEffects.gd" id="5_weather"]
+[ext_resource type="Script" path="res://scripts/world/SceneTransitionArea.gd" id="6_transition"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_house_entrance"]
+size = Vector2(48, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_village_exit"]
+size = Vector2(96, 16)
+
+[node name="Farm" type="Node2D"]
+script = ExtResource("1_farm")
+
+[node name="DayNightCycle" type="CanvasModulate" parent="."]
+script = ExtResource("4_daynight")
+
+[node name="WeatherEffects" type="Node2D" parent="."]
+script = ExtResource("5_weather")
+
+[node name="GroundLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_tileset")
+
+[node name="ObjectLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_tileset")
+
+[node name="YSortRoot" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="YSortRoot" instance=ExtResource("3_player")]
+position = Vector2(312, 96)
+
+[node name="AboveLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_tileset")
+
+[node name="SceneTransitions" type="Node2D" parent="."]
+
+[node name="HouseEntrance" type="Area2D" parent="SceneTransitions"]
+position = Vector2(312, 64)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_transition")
+target_scene = "res://scenes/world/FarmHouse.tscn"
+spawn_point = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/HouseEntrance"]
+shape = SubResource("RectangleShape2D_house_entrance")
+
+[node name="VillageExit" type="Area2D" parent="SceneTransitions"]
+position = Vector2(304, 464)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_transition")
+target_scene = "res://scenes/world/Farm.tscn"
+spawn_point = "from_village"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/VillageExit"]
+shape = SubResource("RectangleShape2D_village_exit")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="default" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(312, 96)
+
+[node name="from_house" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(312, 96)
+
+[node name="from_village" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(304, 432)

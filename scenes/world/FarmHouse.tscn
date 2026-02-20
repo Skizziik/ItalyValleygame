@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://farmhouse01"]
+
+[ext_resource type="Script" path="res://scripts/world/FarmHouse.gd" id="1_farmhouse"]
+[ext_resource type="TileSet" path="res://assets/tilesets/world_tileset.tres" id="2_tileset"]
+[ext_resource type="PackedScene" uid="uid://player01" path="res://scenes/player/Player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/world/DayNightCycle.gd" id="4_daynight"]
+[ext_resource type="Script" path="res://scripts/world/WeatherEffects.gd" id="5_weather"]
+[ext_resource type="Script" path="res://scripts/world/SceneTransitionArea.gd" id="6_transition"]
+[ext_resource type="Script" path="res://scripts/entities/BedInteractable.gd" id="7_bed"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(32, 16)
+
+[node name="FarmHouse" type="Node2D"]
+script = ExtResource("1_farmhouse")
+
+[node name="DayNightCycle" type="CanvasModulate" parent="."]
+script = ExtResource("4_daynight")
+
+[node name="WeatherEffects" type="Node2D" parent="."]
+script = ExtResource("5_weather")
+
+[node name="GroundLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_tileset")
+
+[node name="ObjectLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_tileset")
+
+[node name="YSortRoot" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="YSortRoot" instance=ExtResource("3_player")]
+position = Vector2(88, 128)
+
+[node name="Bed" type="Node2D" parent="YSortRoot"]
+position = Vector2(160, 32)
+script = ExtResource("7_bed")
+
+[node name="BedSprite" type="ColorRect" parent="YSortRoot/Bed"]
+offset_left = -16.0
+offset_top = -8.0
+offset_right = 16.0
+offset_bottom = 24.0
+color = Color(0.55, 0.25, 0.25, 1)
+
+[node name="AboveLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_tileset")
+
+[node name="SceneTransitions" type="Node2D" parent="."]
+
+[node name="ExitDoor" type="Area2D" parent="SceneTransitions"]
+position = Vector2(88, 160)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_transition")
+target_scene = "res://scenes/world/Farm.tscn"
+spawn_point = "from_house"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransitions/ExitDoor"]
+shape = SubResource("RectangleShape2D_door")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="default" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(88, 128)
