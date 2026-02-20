@@ -14,6 +14,22 @@ config/name="Italy Valley"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Enums="*res://scripts/core/Enums.gd"
+Constants="*res://scripts/core/Constants.gd"
+SignalBus="*res://scripts/managers/SignalBus.gd"
+GameManager="*res://scripts/managers/GameManager.gd"
+TimeManager="*res://scripts/managers/TimeManager.gd"
+AudioManager="*res://scripts/managers/AudioManager.gd"
+SceneLoader="*res://scripts/managers/SceneLoader.gd"
+SaveManager="*res://scripts/managers/SaveManager.gd"
+DebugManager="*res://scripts/managers/DebugManager.gd"
+
+[audio]
+
+buses/default_bus_layout="res://audio_bus_layout.tres"
+
 [display]
 
 window/size/viewport_width=640
