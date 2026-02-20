@@ -56,16 +56,16 @@ func _update_color() -> void:
 ## Interpolate the color for a given fractional hour.
 func _sample_color(hour: float) -> Color:
 	# Clamp / wrap hour for the keyframe range
-	if hour < _keyframes[0]["hour"]:
-		return _keyframes[0]["color"]
+	if hour < float(_keyframes[0]["hour"]):
+		return _keyframes[0]["color"] as Color
 
 	for i in range(_keyframes.size() - 1):
 		var kf_a: Dictionary = _keyframes[i]
 		var kf_b: Dictionary = _keyframes[i + 1]
 
-		if hour >= kf_a["hour"] and hour < kf_b["hour"]:
-			var t := (hour - kf_a["hour"]) / (kf_b["hour"] - kf_a["hour"])
+		if hour >= float(kf_a["hour"]) and hour < float(kf_b["hour"]):
+			var t: float = (hour - float(kf_a["hour"])) / (float(kf_b["hour"]) - float(kf_a["hour"]))
 			return (kf_a["color"] as Color).lerp(kf_b["color"] as Color, t)
 
 	# Past the last keyframe
-	return _keyframes[_keyframes.size() - 1]["color"]
+	return _keyframes[_keyframes.size() - 1]["color"] as Color
